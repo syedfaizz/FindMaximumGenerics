@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Findmaxgenerics
+namespace FindMaximumGenerics
 {
-    class Maximum
+    public class Maximum<T> where T : IComparable
     {
-        /// <summary>
-        /// get max value using generics method.
-        /// </summary>
-        /// <param name="firstValue"></param>
-        /// <param name="secondValue"></param>
-        /// <param name="thirdValue"></param>
-        public static void GetMax<T>(T firstValue, T secondValue, T thirdValue) where T : System.IComparable<T>
+        public T[] array;
+        public Maximum(T[] array)
         {
-            //// used compareto method
-            if (firstValue.CompareTo(secondValue) > 0 && firstValue.CompareTo(thirdValue) > 0)
-                Console.WriteLine(firstValue + ", Is the max value.");
-            if (secondValue.CompareTo(firstValue) > 0 && secondValue.CompareTo(thirdValue) > 0)
-                Console.WriteLine(secondValue + ", Is the max value.");
-            if (thirdValue.CompareTo(firstValue) > 0 && thirdValue.CompareTo(secondValue) > 0)
-                Console.WriteLine(thirdValue + ", Is the max value.");
+            this.array = array;
+        }
+        public T[] SortArray(T[] value)
+        {
+            Array.Sort(value);
+            return value;
+        }
+        public T MaxValue(T[] value)
+        {
+            T[] sortedValue = SortArray(value);
+            return sortedValue[sortedValue.Length - 1];
+        }
+        public T GetMax()
+        {
+            T max = MaxValue(this.array);
+            return max;
         }
     }
 }
